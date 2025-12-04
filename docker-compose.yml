@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  postgres_mvp_sprint_3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: postgres_mvp_sprint_3
+    ports:
+      - "5454:5432"  # externa 5454 → interna 5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - mvpnet
+
+volumes:
+  pgdata:
+
+networks:
+  mvpnet:
+    external: true
